@@ -33,6 +33,20 @@ public class CompanyController {
         }
     }
 
+    @GetMapping("/companies/{companyId}")
+    public ResponseEntity findCompanyById(@PathVariable("companyId") UUID companyId) {
+        try {
+            Company company = companyService.getCompanyById(companyId);
+            CompanyApiResponse response = buildResponse(company);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+
+
+
     @PostMapping("/create")
     public ResponseEntity createCompany(@RequestBody CompanyApiRequest request) {
         try {

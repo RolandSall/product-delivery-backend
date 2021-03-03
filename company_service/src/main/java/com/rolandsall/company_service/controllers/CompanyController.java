@@ -5,13 +5,11 @@ import com.rolandsall.company_service.services.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class CompanyController {
@@ -43,6 +41,18 @@ public class CompanyController {
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+
+    @DeleteMapping("/delete/{companyId}")
+    public ResponseEntity deleteCompany(@PathVariable("companyId") UUID companyId) {
+        try {
+            System.out.println(companyId.toString());
+            UUID companyIdDeleted = companyService.deleteCompany(companyId);
+            return ResponseEntity.status(HttpStatus.OK).body(companyIdDeleted);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Company Not Found");
         }
     }
 

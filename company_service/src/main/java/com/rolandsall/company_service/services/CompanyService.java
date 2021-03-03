@@ -20,6 +20,8 @@ public class CompanyService implements ICompanyService{
 
     @Override
     public Company save(Company company) {
+        UUID uuid = UUID.randomUUID();
+        company.setId(uuid);
         return iCompanyRepositoryDAO.save(company);
     }
 

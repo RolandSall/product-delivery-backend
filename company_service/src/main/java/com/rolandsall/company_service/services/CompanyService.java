@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class CompanyService implements ICompanyService{
+public class CompanyService implements ICompanyService {
 
     private ICompanyRepositoryDAO iCompanyRepositoryDAO;
 

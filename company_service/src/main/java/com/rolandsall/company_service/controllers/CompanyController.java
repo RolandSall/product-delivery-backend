@@ -45,8 +45,6 @@ public class CompanyController {
     }
 
 
-
-
     @PostMapping("/create")
     public ResponseEntity createCompany(@RequestBody CompanyApiRequest request) {
         try {

@@ -1,4 +1,4 @@
-package com.rolandsall.company_service.controllers;
+package com.rolandsall.company_service.controllers.company;
 
 import lombok.*;
 

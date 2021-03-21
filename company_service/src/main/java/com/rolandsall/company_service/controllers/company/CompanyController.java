@@ -1,6 +1,7 @@
 package com.rolandsall.company_service.controllers.company;
 
 import com.rolandsall.company_service.entities.Company;
+import com.rolandsall.company_service.services.CompanyService;
 import com.rolandsall.company_service.services.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class CompanyController {
 
     @Autowired
     public CompanyController(ICompanyService companyService) {
-        this.companyService = companyService;
+        this.companyService =  companyService;
     }
 
 
@@ -32,6 +33,11 @@ public class CompanyController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
+    // company Service
+    // Product Service
+
+    // Company Service Wants to Talk to the Product Service Using The BUS.
 
     @GetMapping("/companies/{companyId}")
     public ResponseEntity findCompanyById(@PathVariable("companyId") UUID companyId) {
@@ -90,7 +96,6 @@ public class CompanyController {
                 .id(company.getId())
                 .price(company.getPrice())
                 .build();
-
     }
 
 }

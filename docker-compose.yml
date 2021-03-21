@@ -1,0 +1,29 @@
+version: '3.1'
+services:
+
+  config-service:
+    container_name: config-service
+    image: rolandsall24/config_service:1.0.0
+    build: ./config_service/
+    ports:
+      - "8888:8888"
+
+    healthcheck:
+      test: "curl --fail --silent localhost:8888/actuator/health | grep UP || exit 1"
+      interval: 50s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+
+
+  register_service:
+    container_name: register-service
+    image: rolandsall24/register_service:1.0.0
+    build: ./register_service/
+    ports:
+      - "8761:8761"
+
+    restart: on-failure
+    depends_on:
+      config-service:
+        condition: service_healthy

@@ -46,6 +46,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <finalName>config_service</finalName>
     </build>
 
 </project>

@@ -1,6 +1,9 @@
 package com.rolandsall.product_service.controllers.product;
 
+import com.rolandsall.product_service.entities.CompanyProduct;
 import com.rolandsall.product_service.entities.Product;
+import com.rolandsall.product_service.services.company_product.CompanyProductService;
+import com.rolandsall.product_service.services.company_product.ICompanyProductService;
 import com.rolandsall.product_service.services.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/")
@@ -16,10 +20,12 @@ public class ProductController {
 
 
     private IProductService productService;
+    private ICompanyProductService iCompanyProductService;
 
     @Autowired
-    public ProductController(IProductService productService) {
+    public ProductController(IProductService productService, ICompanyProductService iCompanyProductService) {
         this.productService = productService;
+        this.iCompanyProductService = iCompanyProductService;
     }
 
     @GetMapping("/products")
@@ -28,6 +34,16 @@ public class ProductController {
             List<Product> productList = productService.getAllProducts();
             List<ProductApiResponse> response = buildListOfResponse(productList);
             return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/companies/{companyId}")
+    public ResponseEntity findAllProductsByCompanyId(@PathVariable("companyId") UUID companyId) {
+        try {
+            CompanyProduct productList = iCompanyProductService.getCompanyProductServiceList(companyId);
+            return ResponseEntity.status(HttpStatus.OK).body(productList);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }

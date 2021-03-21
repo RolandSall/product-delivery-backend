@@ -7,4 +7,6 @@ import java.util.UUID;
 public interface ICompanyProductService {
 
     CompanyProduct getCompanyProductServiceList(UUID uuid);
+
+    void addProductToCompanyStock(UUID companyId, UUID productId);
 }

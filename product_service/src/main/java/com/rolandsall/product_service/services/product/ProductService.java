@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,5 +31,11 @@ public class ProductService implements IProductService {
         UUID productID = UUID.randomUUID();
         product.setProductId(productID);
         return productRepository.save(product);
+    }
+
+    @Override
+    public Product getProductById(UUID productId) {
+        Optional<Product> product = productRepository.findById(productId);
+        return product.get();
     }
 }

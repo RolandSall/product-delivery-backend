@@ -49,6 +49,16 @@ public class ProductController {
         }
     }
 
+    @PostMapping("/companies/{companyId}/products/{productId}")
+    public ResponseEntity addProductToCompanyStock(@PathVariable UUID companyId, @PathVariable UUID productId) {
+        try {
+            iCompanyProductService.addProductToCompanyStock(companyId,productId);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Product Was Added");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
     @PostMapping("/products")
     public ResponseEntity createProduct(@RequestBody ProductApiRequest productApiRequest) {
         try {

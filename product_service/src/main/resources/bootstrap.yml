@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: product_service
+
+  cloud:
+    config:
+      uri: http://config-service:8888

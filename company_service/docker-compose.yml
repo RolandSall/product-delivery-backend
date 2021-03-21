@@ -1,0 +1,28 @@
+version: '3'
+services:
+  company_service_mySQL:
+    container_name: company_service_mySQL
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=company
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+
+    volumes:
+      - company_service_target:/var/lib/mysql
+
+  company_service:
+    container_name: company_service
+    image: rolandsall24/company_service:1.0.0
+    ports:
+      [8080:8080]
+    build:
+      context: ./
+      dockerfile: Dockerfile
+
+    depends_on:
+      - company_service_mySQL
+
+volumes:
+  company_service_target:

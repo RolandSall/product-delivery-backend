@@ -112,6 +112,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>company_service</finalName>
     </build>
 
 </project>

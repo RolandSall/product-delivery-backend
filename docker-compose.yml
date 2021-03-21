@@ -10,20 +10,66 @@ services:
 
     healthcheck:
       test: "curl --fail --silent localhost:8888/actuator/health | grep UP || exit 1"
-      interval: 50s
+      interval: 10s
       timeout: 5s
       retries: 5
       start_period: 5s
 
-
-  register_service:
+  register-service:
     container_name: register-service
     image: rolandsall24/register_service:1.0.0
     build: ./register_service/
     ports:
       - "8761:8761"
 
-    restart: on-failure
     depends_on:
       config-service:
         condition: service_healthy
+
+  company_service:
+    container_name: company_service
+    image: rolandsall24/company_service:1.0.0
+    build: ./company_service
+    ports:
+      - "8081:8081"
+
+    depends_on:
+      config-service:
+        condition: service_healthy
+
+    links:
+      - company_service_mySQL
+
+  company_service_mySQL:
+    container_name: company_service_mySQL
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=company
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+
+    volumes:
+      - company_service_target:/var/lib/mysql
+
+  mongo:
+    image: mongo
+    container_name: product-service-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+
+  product-service:
+    container_name: product-service
+    image: rolandsall24/product_service:1.0.0
+    build: ./product_service/
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+    depends_on:
+      config-service:
+        condition: service_healthy
+
+volumes:
+  company_service_target:

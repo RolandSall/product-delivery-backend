@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  mongo:
+    image: mongo
+    container_name: product-service-db
+    restart: always
+    ports:
+      - 27017:27017
+
+  app:
+    container_name: product-service
+    image: rolandsall24/product-service:1.0.0
+    build: ./
+    ports:
+      - "8080:8080"
+    links:
+      - mongo

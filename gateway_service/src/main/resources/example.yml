@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id : r1
+          uri : http://company-service:8081
+          predicates :
+            - Path = /companies/**
+
+        - id : r2
+          uri : http://product-service:8084
+          predicates :
+            - Path = /products/**

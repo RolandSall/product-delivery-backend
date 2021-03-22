@@ -39,7 +39,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/companies/{companyId}")
+    @GetMapping("/products/companies/{companyId}")
     public ResponseEntity findAllProductsByCompanyId(@PathVariable("companyId") UUID companyId) {
         try {
             CompanyProduct productList = iCompanyProductService.getCompanyProductServiceList(companyId);
@@ -49,8 +49,8 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/companies/{companyId}/products/{productId}")
-    public ResponseEntity addProductToCompanyStock(@PathVariable UUID companyId, @PathVariable UUID productId) {
+    @PostMapping("/products/{productId}/companies/{companyId}")
+    public ResponseEntity addProductToCompanyStock(@PathVariable UUID productId,@PathVariable UUID companyId) {
         try {
             iCompanyProductService.addProductToCompanyStock(companyId,productId);
             return ResponseEntity.status(HttpStatus.CREATED).body("Product Was Added");

@@ -23,7 +23,7 @@ public class CompanyController {
     }
 
 
-    @GetMapping("/companies")
+        @GetMapping("/companies")
     public ResponseEntity findAllCompanies() {
         try {
             List<Company> companyList = companyService.getAllCompanies();
@@ -51,7 +51,7 @@ public class CompanyController {
     }
 
 
-    @PostMapping("/create")
+    @PostMapping("/companies/create")
     public ResponseEntity createCompany(@RequestBody CompanyApiRequest request) {
         try {
             Company company = companyService.save(buildCompanyFromRequest(request));
@@ -63,7 +63,7 @@ public class CompanyController {
     }
 
 
-    @DeleteMapping("/delete/{companyId}")
+    @DeleteMapping("/companies/{companyId}")
     public ResponseEntity deleteCompany(@PathVariable("companyId") UUID companyId) {
         try {
             System.out.println(companyId.toString());

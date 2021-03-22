@@ -17,7 +17,7 @@ public class GatewayServiceApplication {
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(r -> r.path("/companies/**")
-                        .uri("lb://COMPANY_SERVICE"))
+                        .uri("lb://COMPANY-SERVICE"))
 
                 .build();
     }

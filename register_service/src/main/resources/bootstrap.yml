@@ -11,3 +11,8 @@ management:
     web:
       exposure:
         include: "*"
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: register-service

@@ -39,6 +39,17 @@ public class ProductController {
         }
     }
 
+    @GetMapping("/products/{productId}")
+    public ResponseEntity findProductById(@PathVariable UUID productId) {
+        try {
+            Product product = productService.getProductById(productId);
+            ProductApiResponse response = buildResponse(product);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
     @GetMapping("/products/companies/{companyId}")
     public ResponseEntity findAllProductsByCompanyId(@PathVariable("companyId") UUID companyId) {
         try {

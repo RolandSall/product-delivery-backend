@@ -91,10 +91,7 @@ services:
     depends_on:
       register-service:
         condition: service_healthy
-      product-service:
-        condition: service_started
-      company-service:
-        condition: service_started
+
 
 volumes:
   company_service_target:

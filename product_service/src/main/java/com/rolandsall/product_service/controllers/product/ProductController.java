@@ -2,7 +2,6 @@ package com.rolandsall.product_service.controllers.product;
 
 import com.rolandsall.product_service.entities.CompanyProduct;
 import com.rolandsall.product_service.entities.Product;
-import com.rolandsall.product_service.services.company_product.CompanyProductService;
 import com.rolandsall.product_service.services.company_product.ICompanyProductService;
 import com.rolandsall.product_service.services.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +99,7 @@ public class ProductController {
 
     private ProductApiResponse buildResponse(Product product) {
         return new ProductApiResponse().builder()
-                .productId(product.getProductId())
+                .id(product.getId())
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())

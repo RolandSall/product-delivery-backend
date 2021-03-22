@@ -29,8 +29,9 @@ public class ProductService implements IProductService {
     @Override
     public Product createProduct(Product product) {
         UUID productID = UUID.randomUUID();
-        product.setProductId(productID);
-        return productRepository.save(product);
+        product.setId(productID);
+        Product productAdded = productRepository.save(product);
+        return productAdded;
     }
 
     @Override

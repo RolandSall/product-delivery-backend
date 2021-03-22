@@ -2,6 +2,7 @@ package com.rolandsall.product_service.entities;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.UUID;
 
@@ -10,9 +11,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Document(collection = "products")
 public class Product {
 
-    private UUID productId;
+    @Id
+    private UUID id;
     private String name;
     private String description;
     private double price;

@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class ProductApiResponse {
-    private UUID productId;
+    private UUID id;
     private String name;
     private String description;
     private double price;

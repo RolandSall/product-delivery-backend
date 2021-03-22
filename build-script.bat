@@ -10,3 +10,8 @@ cd ../
 
 cd ./gateway_service
 docker build -t rolandsall24/gateway_service:1.0.0 .
+
+cd ../
+
+cd ./register_service
+docker build -t rolandsall24/register_service:1.0.0 .

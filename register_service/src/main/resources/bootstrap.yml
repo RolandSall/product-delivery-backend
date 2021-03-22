@@ -1,6 +1,6 @@
 spring:
   application:
-    name: register_service
+    name: register-service
 
   cloud:
     config:

@@ -6,3 +6,8 @@ spring:
     config:
       uri: http://config-service:8888
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

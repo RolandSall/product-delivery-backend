@@ -18,6 +18,7 @@ public class DistributorServiceApplication {
 
 
     @Bean
+    @LoadBalanced
     public WebClient.Builder getWebClientBuilder(){
         return  WebClient.builder();
     }

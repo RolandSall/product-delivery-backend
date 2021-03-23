@@ -91,7 +91,8 @@ services:
     depends_on:
       register-service:
         condition: service_healthy
-
+      config-service:
+        condition: service_healthy
 
 volumes:
   company_service_target:

@@ -6,6 +6,3 @@ spring:
     config:
       uri: http://config-service:8888
 
-eureka:
-  instance:
-    prefer-ip-address: true

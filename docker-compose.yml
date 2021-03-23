@@ -58,8 +58,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
 
-#    volumes:
-#      - company_service_target:/var/lib/mysql
+    volumes:
+      - company_service_target:/var/lib/mysql
 
   mongo:
     image: mongo
@@ -107,5 +107,5 @@ services:
         condition: service_healthy
 
 
-#volumes:
-#  company_service_target:
+volumes:
+  company_service_target:

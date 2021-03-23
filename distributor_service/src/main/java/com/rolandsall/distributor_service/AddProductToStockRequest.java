@@ -12,4 +12,5 @@ import java.util.UUID;
 public class AddProductToStockRequest {
     private UUID companyId;
     private UUID productId;
+    private int quantity;
 }

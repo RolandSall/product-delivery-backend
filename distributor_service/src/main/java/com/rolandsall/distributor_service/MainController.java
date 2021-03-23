@@ -24,9 +24,9 @@ public class MainController {
         this.productService = productService;
     }
 
-    @PostMapping("/companies/{companyId}/products/{productId}")
-    public ResponseEntity addProductToCompanyStock(@PathVariable UUID companyId, @PathVariable UUID productId) {
-        Company company = companyService.getCompanyInfo(companyId);
+    @GetMapping("/try")
+    public ResponseEntity addProductToCompanyStock() {
+        Company company = companyService.getCompanyInfo(UUID.randomUUID());
         return ResponseEntity.status(HttpStatus.CREATED).body(company);
 
     }

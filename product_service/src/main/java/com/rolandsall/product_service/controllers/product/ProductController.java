@@ -1,8 +1,5 @@
 package com.rolandsall.product_service.controllers.product;
-
-import com.rolandsall.product_service.entities.CompanyProduct;
 import com.rolandsall.product_service.entities.Product;
-import com.rolandsall.product_service.services.company_product.ICompanyProductService;
 import com.rolandsall.product_service.services.product.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +16,10 @@ public class ProductController {
 
 
     private IProductService productService;
-    private ICompanyProductService iCompanyProductService;
 
     @Autowired
-    public ProductController(IProductService productService, ICompanyProductService iCompanyProductService) {
+    public ProductController(IProductService productService) {
         this.productService = productService;
-        this.iCompanyProductService = iCompanyProductService;
     }
 
     @GetMapping("/products")
@@ -49,25 +44,6 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/products/companies/{companyId}")
-    public ResponseEntity findAllProductsByCompanyId(@PathVariable("companyId") UUID companyId) {
-        try {
-            CompanyProduct productList = iCompanyProductService.getCompanyProductServiceList(companyId);
-            return ResponseEntity.status(HttpStatus.OK).body(productList);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-    }
-
-    @PostMapping("/products/{productId}/companies/{companyId}")
-    public ResponseEntity addProductToCompanyStock(@PathVariable UUID productId,@PathVariable UUID companyId) {
-        try {
-            iCompanyProductService.addProductToCompanyStock(companyId,productId);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Product Was Added");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-    }
 
     @PostMapping("/products")
     public ResponseEntity createProduct(@RequestBody ProductApiRequest productApiRequest) {

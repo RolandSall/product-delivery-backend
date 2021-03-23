@@ -58,8 +58,8 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=root
 
-    volumes:
-      - company_service_target:/var/lib/mysql
+#    volumes:
+#      - company_service_target:/var/lib/mysql
 
   mongo:
     image: mongo
@@ -96,7 +96,7 @@ services:
 
   distributor-service:
     container_name: distributor-service
-    image: rolandsall24/distributor-service:1.0.0
+    image: rolandsall24/distributor_service:1.0.0
     build: ./distributor_service/
     ports:
       - "8083:8083"
@@ -107,5 +107,5 @@ services:
         condition: service_healthy
 
 
-volumes:
-  company_service_target:
+#volumes:
+#  company_service_target:

@@ -85,6 +85,7 @@ public class ProductController {
                 .name(productApiRequest.getName())
                 .description(productApiRequest.getDescription())
                 .price(productApiRequest.getPrice())
+                .quantity(productApiRequest.getQuantity())
                 .build();
     }
 
@@ -103,6 +104,7 @@ public class ProductController {
                 .name(product.getName())
                 .description(product.getDescription())
                 .price(product.getPrice())
+                .quantity(product.getQuantity())
                 .build();
     }
 

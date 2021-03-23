@@ -15,3 +15,8 @@ cd ../
 
 cd ./register_service
 docker build -t rolandsall24/register_service:1.0.0 .
+
+cd ../
+
+cd ./distributor_service
+docker build -t rolandsall24/distributor_service:1.0.0 .

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: distributor-service
+
+  cloud:
+    config:
+      uri: http://config-service:8888
+
+

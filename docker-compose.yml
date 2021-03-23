@@ -94,5 +94,18 @@ services:
       config-service:
         condition: service_healthy
 
+  distributor-service:
+    container_name: distributor-service
+    image: rolandsall24/distributor-service:1.0.0
+    build: ./distributor_service/
+    ports:
+      - "8083:8083"
+    depends_on:
+      config-service:
+        condition: service_healthy
+      register-service:
+        condition: service_healthy
+
+
 volumes:
   company_service_target:

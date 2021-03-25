@@ -10,23 +10,21 @@ import java.util.UUID;
 @Service
 public class CompanyService {
 
-    private WebClient webClient;
+    private WebClient.Builder webClientBuilder;
 
     @Autowired
-    public CompanyService(WebClient webClient) {
-        this.webClient = webClient;
+    public CompanyService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
     }
 
 
-    public Company getCompanyInfo(UUID companyId) {
-        Company company = webClient
+    public Company getCompanyInfo(UUID companyId){
+        Company company = webClientBuilder.build()
                 .get()
-                .uri("lb://COMPANY-SERVICE/companies/" + companyId)
+                .uri("http://COMPANY-SERVICE/companies/"+companyId)
                 .retrieve()
                 .bodyToMono(Company.class)
                 .block();
         return company;
     }
 }
-
-

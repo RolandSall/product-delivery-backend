@@ -13,15 +13,17 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class DistributorService {
-    private WebClient webClient;
+
+    private WebClient.Builder webClientBuilder;
 
     @Autowired
-    public DistributorService(WebClient webClient) {
-        this.webClient = webClient;
+    public DistributorService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
     }
 
+
     public CompanyProduct addToStock(CompanyProduct companyProduct){
-        CompanyProduct response = webClient.post().
+        CompanyProduct response = webClientBuilder.build().post().
                 uri("http://INVENTORY-SERVICE/add-product")
                 .body(Mono.just(companyProduct), CompanyProduct.class)
                 .retrieve()

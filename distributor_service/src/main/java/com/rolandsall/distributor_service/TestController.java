@@ -15,16 +15,17 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RestController
 public class TestController {
 
-    private WebClient webClient;
+    private WebClient.Builder webClientBuilder;
 
     @Autowired
-    public TestController(WebClient webClient) {
-        this.webClient = webClient;
+    public TestController(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
     }
+
 
     @GetMapping("/tryConnection")
     public ResponseEntity tryCon() {
-           webClient.get().uri("http://company-service:8081/companies/318c08f3-acbe-4f31-ba19-5a06801cbf20")
+        webClientBuilder.build().get().uri("http://company-service:8081/companies/318c08f3-acbe-4f31-ba19-5a06801cbf20")
                 .retrieve()
                 .bodyToMono(Company.class)
                 .block();

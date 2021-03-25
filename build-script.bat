@@ -20,3 +20,8 @@ cd ../
 
 cd ./distributor_service
 docker build -t rolandsall24/distributor_service:1.0.0 .
+
+cd ../
+
+cd ./inventory_service
+docker build -t rolandsall24/inventory_service:1.0.0 .

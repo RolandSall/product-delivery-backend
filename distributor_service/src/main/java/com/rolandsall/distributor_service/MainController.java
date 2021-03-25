@@ -18,22 +18,31 @@ public class MainController {
 
     private CompanyService companyService;
     private ProductService productService;
+    private final DistributorService distributorService;
 
     @Autowired
-    public MainController(CompanyService companyService, ProductService productService) {
+    public MainController(CompanyService companyService, ProductService productService, DistributorService distributorService) {
         this.companyService = companyService;
         this.productService = productService;
+        this.distributorService = distributorService;
     }
 
     @PostMapping("/add-product")
     public ResponseEntity addProductToCompanyStock(@RequestBody AddProductToStockRequest request) {
         Company company = companyService.getCompanyInfo(request.getCompanyId());
         Product product = productService.getProductInfo(request.getProductId());
-        CompanyProduct companyProduct = new CompanyProduct().builder()
+        product.setQuantity(request.getQuantity());
+        CompanyProduct companyProduct = buildDistributorRequest(company, product);
+        CompanyProduct companyProductResponse = distributorService.addToStock(companyProduct);
+        return ResponseEntity.status(HttpStatus.CREATED).body(companyProductResponse);
+
+    }
+
+    private CompanyProduct buildDistributorRequest(Company company, Product product) {
+        return new CompanyProduct().builder()
                 .company(company)
                 .product(product)
                 .build();
-        return ResponseEntity.status(HttpStatus.CREATED).body(companyProduct);
-
     }
 }
+

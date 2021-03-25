@@ -106,6 +106,17 @@ services:
       register-service:
         condition: service_healthy
 
+  inventory-service:
+    container_name: inventory-service
+    image: rolandsall24/inventory_service:1.0.0
+    build: ./inventory_service
+    ports:
+      - "3000:3000"
+    depends_on:
+      config-service:
+        condition: service_healthy
+      register-service:
+        condition: service_healthy
 
 volumes:
   company_service_target:

@@ -11,15 +11,15 @@ import java.util.UUID;
 @Service
 public class ProductService {
 
-    private WebClient.Builder webClientBuilder;
+    private WebClient webClient;
 
     @Autowired
-    public ProductService(WebClient.Builder webClientBuilder) {
-        this.webClientBuilder = webClientBuilder;
+    public ProductService(WebClient webClient) {
+        this.webClient = webClient;
     }
 
     public Product getProductInfo(UUID productId) {
-        Product product = webClientBuilder.build()
+        Product product = webClient
                 .get()
                 .uri("http://PRODUCT-SERVICE/products/"+productId)
                 .retrieve()

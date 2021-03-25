@@ -21,10 +21,12 @@ public class DistributorService {
     }
 
     public CompanyProduct addToStock(CompanyProduct companyProduct){
-        webClient.post().body(Mono.just(companyProduct), CompanyProduct.class)
+        CompanyProduct response = webClient.post().
+                uri("http://INVENTORY-SERVICE/add-product")
+                .body(Mono.just(companyProduct), CompanyProduct.class)
                 .retrieve()
                 .bodyToMono(CompanyProduct.class)
                 .block();
-        return null;
+        return response;
     }
 }

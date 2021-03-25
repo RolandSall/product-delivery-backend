@@ -21,7 +21,7 @@ public class CompanyService {
     public Company getCompanyInfo(UUID companyId) {
         Company company = webClient
                 .get()
-                .uri("http://COMPANY-SERVICE/companies/" + companyId)
+                .uri("lb://COMPANY-SERVICE/companies/" + companyId)
                 .retrieve()
                 .bodyToMono(Company.class)
                 .block();

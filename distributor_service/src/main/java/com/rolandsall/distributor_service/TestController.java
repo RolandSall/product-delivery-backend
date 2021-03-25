@@ -24,7 +24,7 @@ public class TestController {
 
     @GetMapping("/tryConnection")
     public ResponseEntity tryCon() {
-           webClient.get().uri("http://COMPANY-SERVICE/companies/168c4867-1675-479c-bef0-808a24ac383e")
+           webClient.get().uri("http://COMPANY-SERVICE/companies/034cc66e-e082-491e-b6c1-310145b50b65")
                 .retrieve()
                 .bodyToMono(Company.class)
                 .block();

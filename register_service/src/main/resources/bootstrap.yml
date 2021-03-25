@@ -6,15 +6,15 @@ spring:
     config:
       uri: http://config-service:8888
 
-#server:
-#  port: 8761
+server:
+  port: 8761
 
-#eureka:
-#  instance:
-#    prefer-ip-address: true
-#    hostname: localhost
-#  client:
-#    register-with-eureka: false
-#    fetch-registry: false
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
 
 
